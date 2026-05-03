@@ -44,7 +44,7 @@ export const Login = () => {
             background: 'rgba(79, 70, 229, 0.12)', borderRadius: '20px',
             marginBottom: '1.5rem', border: '1px solid rgba(79, 70, 229, 0.25)'
           }}>
-            <Shield size={40} color="var(--primary-color)" />
+            <Shield size={40} color="var(--primary)" />
           </div>
           <h2 style={{ fontSize: '1.75rem', marginBottom: '0.5rem' }}>Welcome Back</h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem' }}>
