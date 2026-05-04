@@ -4,8 +4,9 @@ import { getCampaigns, updateStatus, deleteCampaign } from '../api';
 import { useToast } from '../context/ToastContext';
 import { CreateCampaignModal } from '../components/CreateCampaignModal';
 import { EditUrlModal } from '../components/EditUrlModal';
+import { EditEventsModal } from '../components/EditEventsModal';
 import {
-  Plus, Copy, Trash2, Edit2, CheckCircle2, Play, Pause, Megaphone, AlertCircle
+  Plus, Copy, Trash2, Edit2, CheckCircle2, Play, Pause, Megaphone, AlertCircle, Tag
 } from 'lucide-react';
 
 type Filter = 'all' | 'active' | 'paused';
@@ -19,6 +20,7 @@ export const Campaigns = () => {
   const [error, setError] = useState('');
   const [showCreate, setShowCreate] = useState(false);
   const [editModal, setEditModal] = useState<Campaign | null>(null);
+  const [editEventsModal, setEditEventsModal] = useState<Campaign | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const fetchCampaigns = async (f: Filter = filter) => {
@@ -132,6 +134,7 @@ export const Campaigns = () => {
                 <tr>
                   <th>Campaign</th>
                   <th style={{ textAlign: 'center' }}>Status</th>
+                  <th>Events</th>
                   <th>Tracking URL</th>
                   <th>Postback URL</th>
                   <th>Offer URL</th>
@@ -147,6 +150,17 @@ export const Campaigns = () => {
                     </td>
                     <td style={{ textAlign: 'center' }}>
                       <span className={`badge badge-${camp.status}`}>{camp.status}</span>
+                    </td>
+                    <td>
+                      {camp.events && camp.events.length > 0 ? (
+                        <div className="events-cell">
+                          {camp.events.map(ev => (
+                            <span key={ev} className="event-badge">{ev}</span>
+                          ))}
+                        </div>
+                      ) : (
+                        <span style={{ color: '#475569', fontSize: '0.8rem' }}>—</span>
+                      )}
                     </td>
                     <td>
                       <button
@@ -185,6 +199,13 @@ export const Campaigns = () => {
                           {camp.status === 'active' ? <Pause size={16} /> : <Play size={16} />}
                         </button>
                         <button
+                          className="btn-icon action-btn action-tag"
+                          onClick={() => setEditEventsModal(camp)}
+                          title="Edit Events"
+                        >
+                          <Tag size={16} />
+                        </button>
+                        <button
                           className="btn-icon action-btn action-edit"
                           onClick={() => setEditModal(camp)}
                           title="Edit Offer URL"
@@ -217,6 +238,15 @@ export const Campaigns = () => {
           campaignName={editModal.name}
           currentUrl={editModal.advertiser_offer_url}
           onClose={() => setEditModal(null)}
+          onUpdated={() => fetchCampaigns()}
+        />
+      )}
+      {editEventsModal && (
+        <EditEventsModal
+          campaignId={editEventsModal.$id}
+          campaignName={editEventsModal.name}
+          currentEvents={editEventsModal.events ?? []}
+          onClose={() => setEditEventsModal(null)}
           onUpdated={() => fetchCampaigns()}
         />
       )}

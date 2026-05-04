@@ -25,11 +25,11 @@ export async function getCampaigns(status?: string): Promise<Campaign[]> {
   return [];
 }
 
-export async function createCampaign(name: string, advertiser_offer_url: string): Promise<any> {
+export async function createCampaign(name: string, advertiser_offer_url: string, events?: string[]): Promise<any> {
   const res = await fetch(`${BASE}/campaign`, {
     method: 'POST',
     headers: defaultHeaders,
-    body: JSON.stringify({ name, advertiser_offer_url }),
+    body: JSON.stringify({ name, advertiser_offer_url, ...(events && events.length > 0 ? { events } : {}) }),
   });
   return handleResponse(res);
 }
@@ -41,6 +41,21 @@ export async function updateStatus(id: string, status: string): Promise<void> {
     body: JSON.stringify({ status }),
   });
   await handleResponse(res);
+}
+
+export async function updateEvents(id: string, events: string[]): Promise<void> {
+  const res = await fetch(`${BASE}/campaign/${id}/events`, {
+    method: 'PUT',
+    headers: defaultHeaders,
+    body: JSON.stringify({ events }),
+  });
+  await handleResponse(res);
+}
+
+export async function getCampaignById(id: string): Promise<Campaign> {
+  const res = await fetch(`${BASE}/campaign/${id}`, { headers: defaultHeaders });
+  const data = await handleResponse(res);
+  return data.campaign ?? data;
 }
 
 export async function updateOfferUrl(id: string, advertiser_offer_url: string): Promise<void> {

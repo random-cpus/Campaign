@@ -411,6 +411,91 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .copy-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .copy-btn-success { color: var(--success) !important; border-color: rgba(16,185,129,0.3) !important; }
 
+/* ===== EVENTS CELL (table) ===== */
+.events-cell {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+/* ===== EVENTS TAG INPUT ===== */
+.events-tag-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  min-height: 46px;
+  padding: 0.5rem 0.75rem;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: text;
+  transition: var(--transition);
+}
+
+.events-tag-input:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--primary-glow);
+}
+
+.events-tag-inner-input {
+  flex: 1;
+  min-width: 120px;
+  background: transparent;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+
+.event-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  background: rgba(79,70,229,0.2);
+  border: 1px solid rgba(79,70,229,0.35);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #a5b4fc;
+  white-space: nowrap;
+}
+
+.event-tag-remove {
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+.event-tag-remove:hover { opacity: 1; }
+
+.event-preset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.2rem 0.6rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.event-preset-btn:hover { color: #a5b4fc; border-color: rgba(79,70,229,0.4); background: rgba(79,70,229,0.1); }
+
 /* ===== ACTION BUTTONS ===== */
 .action-group { display: flex; align-items: center; gap: 0.4rem; justify-content: flex-end; }
 
@@ -432,6 +517,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .action-pause:hover { color: #fcd34d; background: rgba(245,158,11,0.12) !important; }
 .action-play:hover { color: #34d399; background: rgba(16,185,129,0.12) !important; }
 .action-edit:hover { color: #93c5fd; background: rgba(59,130,246,0.12) !important; }
+.action-tag:hover { color: #c4b5fd; background: rgba(139,92,246,0.12) !important; }
 .action-delete:hover { color: #f87171; background: rgba(239,68,68,0.12) !important; }
 
 /* ===== BUTTONS ===== */
@@ -1018,10 +1104,11 @@ input::placeholder, textarea::placeholder { color: #475569; }
   
   td:nth-of-type(1)::before { content: "Campaign"; }
   td:nth-of-type(2)::before { content: "Status"; }
-  td:nth-of-type(3)::before { content: "Tracking URL"; }
-  td:nth-of-type(4)::before { content: "Postback URL"; }
-  td:nth-of-type(5)::before { content: "Offer URL"; }
-  td:nth-of-type(6)::before { content: "Actions"; }
+  td:nth-of-type(3)::before { content: "Events"; }
+  td:nth-of-type(4)::before { content: "Tracking URL"; }
+  td:nth-of-type(5)::before { content: "Postback URL"; }
+  td:nth-of-type(6)::before { content: "Offer URL"; }
+  td:nth-of-type(7)::before { content: "Actions"; }
   
   td:nth-of-type(1) {
     flex-direction: column;

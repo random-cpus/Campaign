@@ -53,8 +53,25 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (match) {
       const [, id, sub] = match;
 
+      // GET /campaign/:id
+      if (!sub && method === 'GET') {
+        const response = await fetch(`${BACKEND_BASE_URL}/campaign/${id}`, {
+          headers: backendHeaders,
+        });
+        return res.status(response.status).send(await response.text());
+      }
+
       if (sub === 'status' && method === 'PUT') {
         const response = await fetch(`${BACKEND_BASE_URL}/campaign/${id}/status`, {
+          method: 'PUT',
+          headers: backendHeaders,
+          body: JSON.stringify(req.body),
+        });
+        return res.status(response.status).send(await response.text());
+      }
+
+      if (sub === 'events' && method === 'PUT') {
+        const response = await fetch(`${BACKEND_BASE_URL}/campaign/${id}/events`, {
           method: 'PUT',
           headers: backendHeaders,
           body: JSON.stringify(req.body),
