@@ -4,6 +4,7 @@ import { ToastProvider } from './context/ToastContext';
 import { Sidebar } from './components/Sidebar';
 import { Dashboard } from './pages/Dashboard';
 import { Campaigns } from './pages/Campaigns';
+import { Reports } from './pages/Reports';
 import { Login } from './pages/Login';
 
 // Full-screen loading spinner
@@ -43,6 +44,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<ProtectedLayout><Dashboard /></ProtectedLayout>} />
             <Route path="/campaigns" element={<ProtectedLayout><Campaigns /></ProtectedLayout>} />
+            <Route path="/reports" element={<ProtectedLayout><Reports /></ProtectedLayout>} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Router>

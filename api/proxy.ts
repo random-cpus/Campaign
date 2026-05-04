@@ -80,6 +80,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }
     }
 
+    // GET /reports/:campaignId
+    const reportMatch = path.match(/^\/reports\/([^\\/]+)$/);
+    if (reportMatch && method === 'GET') {
+      const [, campaignId] = reportMatch;
+      const queryParams = new URLSearchParams();
+      if (req.query.affiliate_id) queryParams.set('affiliate_id', req.query.affiliate_id as string);
+      if (req.query.period) queryParams.set('period', req.query.period as string);
+      if (req.query.start_date) queryParams.set('start_date', req.query.start_date as string);
+      if (req.query.end_date) queryParams.set('end_date', req.query.end_date as string);
+      const qs = queryParams.toString();
+      const reportUrl = `${BACKEND_BASE_URL}/reports/${campaignId}${qs ? `?${qs}` : ''}`;
+      const response = await fetch(reportUrl, { headers: backendHeaders });
+      const data = await response.text();
+      return res.status(response.status).send(data);
+    }
+
     return res.status(404).json({ error: 'Not Found' });
   } catch (error: any) {
     console.error('[Proxy Error]', error);

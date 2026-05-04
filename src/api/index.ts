@@ -59,3 +59,43 @@ export async function deleteCampaign(id: string): Promise<void> {
   });
   await handleResponse(res);
 }
+
+export interface ReportFilters {
+  affiliate_id?: string;
+  period?: 'last_week' | 'last_month' | 'current_month' | 'custom';
+  start_date?: string;
+  end_date?: string;
+}
+
+export interface ReportBreakdownItem {
+  event: string;
+  clicks: number;
+  conversions: number;
+}
+
+export interface ReportData {
+  success: boolean;
+  campaign_id: string;
+  campaign_name: string;
+  filters: {
+    affiliate_id: string | null;
+    period: string | null;
+  };
+  totals: {
+    clicks: number;
+    conversions: number;
+  };
+  breakdown: ReportBreakdownItem[];
+}
+
+export async function getReport(campaignId: string, filters: ReportFilters = {}): Promise<ReportData> {
+  const params = new URLSearchParams();
+  if (filters.affiliate_id) params.set('affiliate_id', filters.affiliate_id);
+  if (filters.period) params.set('period', filters.period);
+  if (filters.start_date) params.set('start_date', filters.start_date);
+  if (filters.end_date) params.set('end_date', filters.end_date);
+  const query = params.toString();
+  const url = `${BASE}/reports/${campaignId}${query ? `?${query}` : ''}`;
+  const res = await fetch(url, { headers: defaultHeaders });
+  return handleResponse(res);
+}

@@ -178,8 +178,9 @@ body {
 
 /* ===== PAGE ===== */
 .page {
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 2.5rem;
   max-width: 1300px;
+  width: 100%;
 }
 
 .page-header {
@@ -1034,4 +1035,166 @@ input::placeholder, textarea::placeholder { color: #475569; }
     justify-content: flex-end;
     gap: 0.8rem;
   }
+
+  /* Reports mobile */
+  .report-filter-body {
+    grid-template-columns: 1fr !important;
+  }
+  .report-run-btn {
+    grid-column: 1 !important;
+  }
+}
+
+/* ===== REPORTS ===== */
+.report-filter-card {
+  margin-bottom: 1.75rem;
+}
+
+.report-filter-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.report-filter-body {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem 1.25rem;
+  padding: 1.5rem;
+  align-items: end;
+}
+
+.report-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.report-label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.report-optional {
+  font-weight: 400;
+  color: #475569;
+}
+
+.select-wrap {
+  position: relative;
+}
+
+.select-wrap select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 2rem;
+  cursor: pointer;
+}
+
+.select-chevron {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.report-run-btn {
+  align-self: end;
+  min-width: 140px;
+  justify-content: center;
+}
+
+/* Meta row */
+.report-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+.report-meta-campaign {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: white;
+}
+
+.report-meta-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(79,70,229,0.15);
+  color: #a5b4fc;
+  border: 1px solid rgba(79,70,229,0.25);
+  text-transform: capitalize;
+}
+
+.report-meta-aff {
+  background: rgba(16,185,129,0.12);
+  color: #34d399;
+  border-color: rgba(16,185,129,0.25);
+}
+
+/* Event badge in table */
+.event-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.7rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  font-family: monospace;
+  color: #c7d2fe;
+}
+
+/* Conversion rate pill */
+.rate-pill {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  background: rgba(245,158,11,0.12);
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fcd34d;
+}
+
+/* Empty prompt for reports */
+.report-empty-prompt {
+  margin-top: 1.5rem;
+  padding: 4rem 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.report-empty-prompt h3 {
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.report-empty-prompt p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 420px;
+  margin: 0 auto;
 }

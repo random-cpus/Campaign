@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Megaphone, ChevronLeft, ChevronRight, Zap, LogOut } from 'lucide-react';
+import { LayoutDashboard, Megaphone, BarChart3, ChevronLeft, ChevronRight, Zap, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 
 const navItems = [
   { to: '/', icon: <LayoutDashboard size={20} />, label: 'Dashboard', end: true },
   { to: '/campaigns', icon: <Megaphone size={20} />, label: 'Campaigns' },
+  { to: '/reports', icon: <BarChart3 size={20} />, label: 'Reports' },
 ];
 
 export const Sidebar = () => {
