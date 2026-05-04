@@ -1078,21 +1078,21 @@ input::placeholder, textarea::placeholder { color: #475569; }
   
   td {
     border-top: none;
-    padding: 0.6rem 0;
+    padding: 0.8rem 0;
     position: relative;
     padding-left: 40%;
     text-align: right;
     display: flex;
     justify-content: flex-end;
-    align-items: center;
+    align-items: flex-start;
     min-height: 40px;
   }
   
   td::before {
     position: absolute;
-    top: 50%;
+    top: 0.8rem;
     left: 0;
-    transform: translateY(-50%);
+    transform: none;
     width: 35%;
     white-space: nowrap;
     text-align: left;
@@ -1100,6 +1100,7 @@ input::placeholder, textarea::placeholder { color: #475569; }
     font-weight: 600;
     color: #64748b;
     text-transform: uppercase;
+    line-height: 1.5;
   }
   
   td:nth-of-type(1)::before { content: "Campaign"; }
@@ -1114,6 +1115,10 @@ input::placeholder, textarea::placeholder { color: #475569; }
     flex-direction: column;
     align-items: flex-end;
     gap: 0.2rem;
+  }
+
+  .events-cell {
+    justify-content: flex-end;
   }
   .camp-name { margin-bottom: 0; }
   
